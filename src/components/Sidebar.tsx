@@ -10,10 +10,11 @@ import { useWindowSize } from '@uidotdev/usehooks';
 
 interface Props {
   open: boolean;
+  setOpen: (open: boolean) => void;
 }
 
 export function Sidebar(props: Props) {
-  const { open } = props;
+  const { open, setOpen } = props;
   const { loading } = useBatteries();
   loading;
 
@@ -34,11 +35,14 @@ export function Sidebar(props: Props) {
     <>
       {/* background overlay */}
       {open && isMobile && (
-        <div className="fixed -z-20 inset-0 bg-gray-500/80 sm:hidden"></div>
+        <div
+          className="fixed -z-2 inset-0 bg-gray-500/80 sm:hidden"
+          onClick={() => setOpen(false)}
+        ></div>
       )}
       {/* actual sidebar */}
       <aside
-        className={`bg-sidebarBg text-gray-300 fixed top-0 left-0 bottom-0 sm:static w-64 transition-transform min-h-screen ${
+        className={`bg-sidebarBg text-gray-300 fixed top-0 left-0 bottom-0 sm:static shrink-0 w-64 transition-transform ${
           open || !isMobile ? 'translate-x-0' : '-translate-x-80'
         }`}
       >
