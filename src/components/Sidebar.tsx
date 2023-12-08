@@ -6,6 +6,7 @@ import cogIcon from '../assets/images/cog.png';
 import { useBatteries } from '../hooks';
 import { Link } from 'react-router-dom';
 import TriangleIcon from './icons/TriangleIcon';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 interface Props {
   open: boolean;
@@ -26,16 +27,19 @@ export function Sidebar(props: Props) {
   }>({});
   const { batteries } = useBatteries();
 
+  const windowSize = useWindowSize();
+  const isMobile = windowSize.width! < 640; // 640px is the 'sm' breakpoint by tailwind
+
   return (
     <>
       {/* background overlay */}
-      {open && (
+      {open && isMobile && (
         <div className="fixed -z-20 inset-0 bg-gray-500/80 sm:hidden"></div>
       )}
       {/* actual sidebar */}
       <aside
         className={`bg-sidebarBg text-gray-300 fixed top-0 left-0 bottom-0 sm:static w-64 transition-transform min-h-screen ${
-          open ? 'translate-x-0' : '-translate-x-80'
+          open || !isMobile ? 'translate-x-0' : '-translate-x-80'
         }`}
       >
         <nav className="flex items-center w-full">
