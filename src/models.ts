@@ -1,12 +1,20 @@
-export interface BatteryData {
-  id: number;
-  name: string;
+export interface BatteryReading {
   createdAt: Date; // when this reading was taken
   temperature: number;
   voltage: number;
   current: number;
 }
 
+// this data belongs to an actual physical instance of a battery
+export interface BatteryData {
+  id: number;
+  name: string;
+  createdAt: string;
+  readings: BatteryReading[];
+  predictions?: BatteryPrediction[];
+}
+
+// this data belongs to a digital twin on our platform, maps to a physical instance via dataSource property
 export interface Battery {
   id: number;
   name: string;

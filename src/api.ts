@@ -66,4 +66,5 @@ export function post<P, R>({
         setMessage(res.message);
       }
     });
+  // TODO handle for catch
 }
