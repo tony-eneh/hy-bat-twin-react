@@ -21,8 +21,8 @@ export function Modal({ children, close, show }: Props) {
     };
   }, []);
 
-  return (
-    <div className={`relative z-50 ${show ? 'block' : 'hidden'}`}>
+  return show ? (
+    <div className={'relative z-50'}>
       <div className="bg-gray-700/25 fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
         <div
           ref={inner}
@@ -38,5 +38,5 @@ export function Modal({ children, close, show }: Props) {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }
