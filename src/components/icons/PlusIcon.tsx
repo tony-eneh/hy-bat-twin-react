@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Props {
   size?: 'lg' | 'md';
 }
@@ -9,7 +7,7 @@ const sizes = {
   md: '24',
 };
 
-function PlusIcon({ size = 'md' }: Props) {
+export function PlusIcon({ size = 'md' }: Props) {
   return (
     <svg
       width={sizes[size]}
