@@ -1,10 +1,4 @@
-import React from 'react';
-
-interface Props {}
-
-function MenuIcon(props: Props) {
-  const {} = props;
-
+export function MenuIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
