@@ -5,7 +5,7 @@ import batteryIcon from '../assets/images/menu-item.png';
 import cogIcon from '../assets/images/cog.png';
 import { useBatteries } from '../hooks';
 import { Link } from 'react-router-dom';
-import TriangleIcon from './icons/TriangleIcon';
+import { TriangleIcon } from './icons';
 import { useWindowSize } from '@uidotdev/usehooks';
 
 interface Props {
@@ -73,14 +73,15 @@ export function Sidebar(props: Props) {
               </Link>
             </li>
             <li>
-              <div
+              <Link
+                to={'/batteries'}
                 className="flex items-center gap-2 pl-3 my-2 cursor-pointer select-none"
                 onClick={() => setDeployExpanded(!deployExpanded)}
               >
                 <TriangleIcon expanded={deployExpanded} />
                 <img src={openBoxIcon} alt="" />
                 Deployment
-              </div>
+              </Link>
               <ul
                 className={`pl-3 overflow-hidden transition-all ${
                   deployExpanded ? 'h-72' : 'h-0'
@@ -89,7 +90,7 @@ export function Sidebar(props: Props) {
                 {batteries.map((battery) => (
                   <li key={battery.id}>
                     <Link
-                      to={`/battery/${battery.id}`}
+                      to={`/batteries/${battery.id}`}
                       className="flex items-center gap-2 pl-3 my-2"
                       onClick={() =>
                         setBatteryExpanded({
@@ -108,7 +109,7 @@ export function Sidebar(props: Props) {
                     >
                       <li className="h-8">
                         <Link
-                          to={`/battery/${battery.id}?graph=temperature`}
+                          to={`/batteries/${battery.id}?graph=temperature`}
                           className="flex items-center gap-2 pl-3 my-2"
                         >
                           <img src={cogIcon} alt="" className="h-6" />
@@ -117,7 +118,7 @@ export function Sidebar(props: Props) {
                       </li>
                       <li className="h-8">
                         <Link
-                          to={`/battery/${battery.id}?graph=voltage`}
+                          to={`/batteries/${battery.id}?graph=voltage`}
                           className="flex items-center gap-2 pl-3 my-2"
                         >
                           <img src={cogIcon} alt="" className="h-6" />
@@ -126,7 +127,7 @@ export function Sidebar(props: Props) {
                       </li>
                       <li className="h-8">
                         <Link
-                          to={`/battery/${battery.id}?graph=current`}
+                          to={`/batteries/${battery.id}?graph=current`}
                           className="flex items-center gap-2 pl-3 my-2"
                         >
                           <img src={cogIcon} alt="" className="h-6" />

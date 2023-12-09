@@ -1,4 +1,4 @@
-export default function TriangleIcon({
+export function TriangleIcon({
   classes,
   expanded,
 }: {
