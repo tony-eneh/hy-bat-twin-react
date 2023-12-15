@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import searchIcon from '../assets/images/search.png';
 import openBoxIcon from '../assets/images/open-box.png';
 import batteryIcon from '../assets/images/menu-item.png';
 import cogIcon from '../assets/images/cog.png';
-import { useBatteries } from '../hooks';
 import { Link } from 'react-router-dom';
 import { TriangleIcon } from './icons';
 import { useWindowSize } from '@uidotdev/usehooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApiStatus, Battery } from '../models';
+import { getBatteries } from '../redux/batteriesSlice';
 
 interface Props {
   open: boolean;
@@ -15,8 +17,17 @@ interface Props {
 
 export function Sidebar(props: Props) {
   const { open, setOpen } = props;
-  const { loading } = useBatteries();
-  loading;
+  const { data: batteries, status } = useSelector(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (state: any) => state.battery
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dispatch(getBatteries() as any);
+  }, []);
 
   // const [batteriesExpanded, setBatteriesExpanded] = useState(false);
   const [openTab, setOpenTab] = useState<'architecture' | 'settings'>(
@@ -26,7 +37,6 @@ export function Sidebar(props: Props) {
   const [batteryExpanded, setBatteryExpanded] = useState<{
     [k in string]: boolean;
   }>({});
-  const { batteries } = useBatteries();
 
   const windowSize = useWindowSize();
   const isMobile = windowSize.width! < 640; // 640px is the 'sm' breakpoint by tailwind
@@ -87,56 +97,60 @@ export function Sidebar(props: Props) {
                   deployExpanded ? 'h-72' : 'h-0'
                 }`}
               >
-                {batteries.map((battery) => (
-                  <li key={battery.id}>
-                    <Link
-                      to={`/batteries/${battery.id}`}
-                      className="flex items-center gap-2 pl-3 my-2"
-                      onClick={() =>
-                        setBatteryExpanded({
-                          [battery.id]: !batteryExpanded[battery.id],
-                        })
-                      }
-                    >
-                      <TriangleIcon expanded={batteryExpanded[battery.id]} />
-                      <img src={batteryIcon} alt="" className="h-6" />
-                      {battery.name}
-                    </Link>
-                    <ul
-                      className={`pl-3 overflow-hidden transition-all ${
-                        batteryExpanded[battery.id] ? 'h-32' : 'h-0'
-                      }`}
-                    >
-                      <li className="h-8">
-                        <Link
-                          to={`/batteries/${battery.id}?graph=temperature`}
-                          className="flex items-center gap-2 pl-3 my-2"
-                        >
-                          <img src={cogIcon} alt="" className="h-6" />
-                          Temperature
-                        </Link>
-                      </li>
-                      <li className="h-8">
-                        <Link
-                          to={`/batteries/${battery.id}?graph=voltage`}
-                          className="flex items-center gap-2 pl-3 my-2"
-                        >
-                          <img src={cogIcon} alt="" className="h-6" />
-                          Voltage
-                        </Link>
-                      </li>
-                      <li className="h-8">
-                        <Link
-                          to={`/batteries/${battery.id}?graph=current`}
-                          className="flex items-center gap-2 pl-3 my-2"
-                        >
-                          <img src={cogIcon} alt="" className="h-6" />
-                          Current
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                ))}
+                {status === ApiStatus.PENDING ? (
+                  <li className="pl-3">loading...</li>
+                ) : (
+                  (batteries as Battery[]).map((battery) => (
+                    <li key={battery.id}>
+                      <Link
+                        to={`/batteries/${battery.id}`}
+                        className="flex items-center gap-2 pl-3 my-2"
+                        onClick={() =>
+                          setBatteryExpanded({
+                            [battery.id]: !batteryExpanded[battery.id],
+                          })
+                        }
+                      >
+                        <TriangleIcon expanded={batteryExpanded[battery.id]} />
+                        <img src={batteryIcon} alt="" className="h-6" />
+                        {battery.name}
+                      </Link>
+                      <ul
+                        className={`pl-3 overflow-hidden transition-all ${
+                          batteryExpanded[battery.id] ? 'h-32' : 'h-0'
+                        }`}
+                      >
+                        <li className="h-8">
+                          <Link
+                            to={`/batteries/${battery.id}?graph=temperature`}
+                            className="flex items-center gap-2 pl-3 my-2"
+                          >
+                            <img src={cogIcon} alt="" className="h-6" />
+                            Temperature
+                          </Link>
+                        </li>
+                        <li className="h-8">
+                          <Link
+                            to={`/batteries/${battery.id}?graph=voltage`}
+                            className="flex items-center gap-2 pl-3 my-2"
+                          >
+                            <img src={cogIcon} alt="" className="h-6" />
+                            Voltage
+                          </Link>
+                        </li>
+                        <li className="h-8">
+                          <Link
+                            to={`/batteries/${battery.id}?graph=current`}
+                            className="flex items-center gap-2 pl-3 my-2"
+                          >
+                            <img src={cogIcon} alt="" className="h-6" />
+                            Current
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+                  ))
+                )}
               </ul>
             </li>
           </ul>

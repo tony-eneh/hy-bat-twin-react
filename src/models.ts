@@ -23,11 +23,14 @@ export interface Battery {
   predictions?: BatteryPrediction[];
 }
 
-export interface BatteryPrediction {
-  batteryId: number;
+export interface BatteryPrediction extends BatteryPredictionPayload {
   createdAt: Date;
   soc: number; // state of charge
   soh: number; // state of health
+}
+
+export interface BatteryPredictionPayload {
+  batteryId: number;
   chargeCycles: number;
 }
 
@@ -38,4 +41,10 @@ export interface ApiResponse<T = unknown> {
   totalRecords?: number;
   pageNumber?: number;
   pageSize?: number;
+}
+
+export enum ApiStatus {
+  PENDING,
+  ERROR,
+  SUCCESS,
 }
