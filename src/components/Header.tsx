@@ -27,16 +27,18 @@ export function Header(props: Props) {
         {location.pathname
           .split('/')
           .filter((subpath) => subpath)
-          .map((subpath) => {
+          .map((subpath, i) => {
             const paths = location.pathname.split('/');
             const ind = paths.indexOf(subpath);
             const path = paths.slice(0, ind + 1).join('/');
 
             return (
-              <>
+              <span key={i}>
                 <span>&gt;</span>
-                <Link to={path}>{subpath}</Link>
-              </>
+                <Link to={path} className="ml-5">
+                  {subpath}
+                </Link>
+              </span>
             );
           })}
       </div>
