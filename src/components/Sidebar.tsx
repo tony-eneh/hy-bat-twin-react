@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 import { TriangleIcon } from './icons';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { useDispatch, useSelector } from 'react-redux';
-import { ApiStatus, Battery } from '../models';
-import { getBatteries } from '../redux/batteriesSlice';
+import { ApiResponse, AppStore, Battery } from '../types';
+import { getBatteries } from '../services/batteries';
+import { setBatteries } from '../redux/batteriesSlice';
 
 interface Props {
   open: boolean;
@@ -17,17 +18,19 @@ interface Props {
 
 export function Sidebar(props: Props) {
   const { open, setOpen } = props;
-  const { data: batteries, status } = useSelector(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (state: any) => state.battery
+  const { data: batteries } = useSelector<AppStore, ApiResponse<Battery[]>>(
+    (state) => state.battery
   );
+  const [loadingBatteries, setLoadingBatteries] = useState(true);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dispatch(getBatteries() as any);
-  }, []);
+    getBatteries()
+      .then((res) => dispatch(setBatteries(res)))
+      // TODO if call fails, do something
+      .finally(() => setLoadingBatteries(false));
+  }, [dispatch]);
 
   // const [batteriesExpanded, setBatteriesExpanded] = useState(false);
   const [openTab, setOpenTab] = useState<'architecture' | 'settings'>(
@@ -94,10 +97,12 @@ export function Sidebar(props: Props) {
               </Link>
               <ul
                 className={`pl-3 overflow-hidden transition-all ${
-                  deployExpanded ? 'h-72' : 'h-0'
+                  deployExpanded
+                    ? `h-[${((batteries?.length || 0) * 2.5 + 5) * 16}px]`
+                    : 'h-0'
                 }`}
               >
-                {status === ApiStatus.PENDING ? (
+                {loadingBatteries ? (
                   <li className="pl-3">loading...</li>
                 ) : (
                   (batteries as Battery[]).map((battery) => (

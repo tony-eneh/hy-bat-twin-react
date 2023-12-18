@@ -47,4 +47,9 @@ export enum ApiStatus {
   PENDING,
   ERROR,
   SUCCESS,
+  IDLE,
+}
+export interface AppStore {
+  battery: ApiResponse<Battery[]>;
+  dataSource: ApiResponse<BatteryData[]>;
 }
