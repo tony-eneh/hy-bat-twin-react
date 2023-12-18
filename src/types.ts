@@ -50,6 +50,6 @@ export enum ApiStatus {
   IDLE,
 }
 export interface AppStore {
-  battery: ApiResponse<Battery[]>;
-  dataSource: ApiResponse<BatteryData[]>;
+  batteries: ApiResponse<Battery[]>;
+  dataSources: ApiResponse<BatteryData[]>;
 }

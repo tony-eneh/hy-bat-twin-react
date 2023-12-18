@@ -60,7 +60,7 @@ function NewDigitalTwinModal({ show, close }: ModalProps) {
   const [newBatteryName, setNewBatteryName] = useState('');
   const [newBatterySource, setNewBatterySource] = useState<BatteryData>();
   const { data: sources } = useSelector<AppStore, ApiResponse<BatteryData[]>>(
-    (state) => state.dataSource
+    (state) => state.dataSources
   );
   const [newlyCreatedBattery, setNewlyCreatedBattery] = useState({} as Battery);
   const [creatingBattery, setCreatingBattery] = useState(false);

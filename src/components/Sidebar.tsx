@@ -19,7 +19,7 @@ interface Props {
 export function Sidebar(props: Props) {
   const { open, setOpen } = props;
   const { data: batteries } = useSelector<AppStore, ApiResponse<Battery[]>>(
-    (state) => state.battery
+    (state) => state.batteries
   );
   const [loadingBatteries, setLoadingBatteries] = useState(true);
 

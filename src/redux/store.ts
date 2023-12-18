@@ -4,7 +4,7 @@ import dataSourcesSlice from './dataSourcesSlice';
 
 export const store = configureStore({
   reducer: {
-    battery: batteriesReducer,
-    dataSource: dataSourcesSlice
+    batteries: batteriesReducer,
+    dataSources: dataSourcesSlice,
   },
 });
