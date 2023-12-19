@@ -15,6 +15,7 @@ export function getBatteries(): Promise<ApiResponse<Battery[]>> {
 export function createBattery(payload: {
   name: string;
   source: string;
+  description: string;
 }): Promise<ApiResponse<Battery>> {
   return fetch(`${import.meta.env.VITE_API_URL}/batteries`, {
     headers,
