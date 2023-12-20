@@ -1,3 +1,4 @@
+import { useWindowSize } from '@uidotdev/usehooks';
 import { RefObject, useEffect } from 'react';
 // import { Battery, BatteryData } from '../models';
 // import * as api from '../services/api';
@@ -55,3 +56,11 @@ export function useClickOutside<T extends HTMLElement>(
 
 //   return { data: data || [], loading, message, success };
 // }
+
+export function useScreenSize() {
+  const windowSize = useWindowSize();
+  // TODO read out 640 directly from some tailwind variable or something rather than hardcode
+  const isMobile = windowSize.width! < 640; // 640px is the 'sm' breakpoint by tailwind
+
+  return { windowSize, isMobile };
+}
