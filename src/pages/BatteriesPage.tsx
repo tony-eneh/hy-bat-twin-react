@@ -19,7 +19,7 @@ export default function BatteriesPage() {
     );
 
   return (
-    <div className="flex-grow p-4">
+    <div className="flex-grow p-8">
       <div className="max-w-2xl mx-auto">
         <button
           className="flex items-center gap-3 bg-sidebarBg text-white p-3 rounded ml-auto"

@@ -23,6 +23,7 @@ export interface Battery {
   predictions?: BatteryPrediction[];
   image?: string;
   description?: string;
+  chargeCycles: number;
 }
 
 export interface BatteryPrediction extends BatteryPredictionPayload {
@@ -34,6 +35,13 @@ export interface BatteryPrediction extends BatteryPredictionPayload {
 export interface BatteryPredictionPayload {
   batteryId: number;
   chargeCycles: number;
+}
+
+export interface GetPredictionsPayload {
+  batteryId: number;
+  minChargeCycle: number;
+  maxChargeCycle: number;
+  step?: number;
 }
 
 export interface ApiResponse<T = unknown> {

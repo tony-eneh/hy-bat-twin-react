@@ -31,3 +31,14 @@ export function stripTime(dateString: string) {
 export function truncateText(text: string = '', maxLength = 120) {
   return text.length > 30 ? text.substring(0, maxLength) + '...' : text;
 }
+
+export function isDigits(value: string) {
+  return /^\d+$/.test(value);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function serialize(obj: any) {
+  return Object.keys(obj)
+    .map((key) => `${key}=${obj[key]}`)
+    .join('&');
+}

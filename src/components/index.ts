@@ -5,3 +5,7 @@ export * from './Modal';
 export * from './Sidebar';
 export * from './Dropdown';
 export * from './NewDigitalTwinModal';
+export * from './Prediction';
+export * from './Analysis';
+export * from './BatteryDetails';
+export * from './SectionHeading';

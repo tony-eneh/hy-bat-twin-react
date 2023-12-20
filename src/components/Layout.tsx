@@ -19,7 +19,7 @@ export function Layout({ children }: Props) {
         }`}
       >
         <Sidebar open={open} setOpen={setOpen} />
-        <div className="overflow-y-auto relative w-full min-h-full p-4">
+        <div className="overflow-y-auto relative w-full min-h-full">
           {/* background gradients */}
           <div className="fixed top-12 right-2 w-56 h-56 rounded-full opacity-50 -z-20 bg-gradient-to-tr from-[#a18cd1] to-[#fbc2eb]"></div>
           <div

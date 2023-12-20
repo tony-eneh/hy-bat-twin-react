@@ -5,9 +5,10 @@ interface Props {
   children: ReactNode;
   close: () => void;
   show: boolean;
+  bodyClasses?: string;
 }
 
-export function Modal({ children, close, show }: Props) {
+export function Modal({ children, close, show, bodyClasses }: Props) {
   const inner = useRef(null);
 
   useClickOutside(inner, close, show);
@@ -22,7 +23,7 @@ export function Modal({ children, close, show }: Props) {
   }, []);
 
   return show ? (
-    <div className={'relative z-50'}>
+    <div className={'relative z-50 ' + bodyClasses}>
       <div className="bg-gray-700/25 fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
         <div
           ref={inner}
