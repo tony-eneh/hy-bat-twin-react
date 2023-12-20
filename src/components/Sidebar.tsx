@@ -116,68 +116,70 @@ export function Sidebar(props: Props) {
                     : 'h-0'
                 }`}
               >
-                {loadingBatteries ? (
-                  <li className="pl-3">loading...</li>
-                ) : (
-                  (batteries as Battery[]).map((battery) => (
-                    <li key={battery.id}>
-                      <Link
-                        to={`/batteries/${battery.id}`}
-                        className={`flex items-center gap-2 pl-3 my-2 ${
-                          location.pathname === '/batteries/' + battery.id
-                            ? selectedItem
-                            : ''
-                        }`}
-                        onClick={() => {
-                          setBatteryExpanded({
-                            [battery.id]: !batteryExpanded[battery.id],
-                          });
-                          // slideOut();
-                        }}
-                      >
-                        <TriangleIcon expanded={batteryExpanded[battery.id]} />
-                        <img src={batteryIcon} alt="" className="h-6" />
-                        {battery.name}
-                      </Link>
-                      <ul
-                        className={`pl-3 overflow-hidden transition-all ${
-                          batteryExpanded[battery.id] ? 'h-32' : 'h-0'
-                        }`}
-                      >
-                        <li className="h-8">
-                          <Link
-                            to={`/batteries/${battery.id}?graph=temperature`}
-                            className="flex items-center gap-2 pl-3 my-2"
-                            onClick={slideOut}
-                          >
-                            <img src={cogIcon} alt="" className="h-6" />
-                            Temperature
-                          </Link>
-                        </li>
-                        <li className="h-8">
-                          <Link
-                            to={`/batteries/${battery.id}?graph=voltage`}
-                            className="flex items-center gap-2 pl-3 my-2"
-                            onClick={slideOut}
-                          >
-                            <img src={cogIcon} alt="" className="h-6" />
-                            Voltage
-                          </Link>
-                        </li>
-                        <li className="h-8">
-                          <Link
-                            to={`/batteries/${battery.id}?graph=current`}
-                            className="flex items-center gap-2 pl-3 my-2"
-                            onClick={slideOut}
-                          >
-                            <img src={cogIcon} alt="" className="h-6" />
-                            Current
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
-                  ))
+                {loadingBatteries && <li className="pl-3">loading...</li>}
+
+                {!loadingBatteries && !batteries && (
+                  <li className="pl-3">No batteries found</li>
                 )}
+
+                {(batteries as Battery[])?.map((battery) => (
+                  <li key={battery.id}>
+                    <Link
+                      to={`/batteries/${battery.id}`}
+                      className={`flex items-center gap-2 pl-3 my-2 ${
+                        location.pathname === '/batteries/' + battery.id
+                          ? selectedItem
+                          : ''
+                      }`}
+                      onClick={() => {
+                        setBatteryExpanded({
+                          [battery.id]: !batteryExpanded[battery.id],
+                        });
+                        // slideOut();
+                      }}
+                    >
+                      <TriangleIcon expanded={batteryExpanded[battery.id]} />
+                      <img src={batteryIcon} alt="" className="h-6" />
+                      {battery.name}
+                    </Link>
+                    <ul
+                      className={`pl-3 overflow-hidden transition-all ${
+                        batteryExpanded[battery.id] ? 'h-32' : 'h-0'
+                      }`}
+                    >
+                      <li className="h-8">
+                        <Link
+                          to={`/batteries/${battery.id}?graph=temperature`}
+                          className="flex items-center gap-2 pl-3 my-2"
+                          onClick={slideOut}
+                        >
+                          <img src={cogIcon} alt="" className="h-6" />
+                          Temperature
+                        </Link>
+                      </li>
+                      <li className="h-8">
+                        <Link
+                          to={`/batteries/${battery.id}?graph=voltage`}
+                          className="flex items-center gap-2 pl-3 my-2"
+                          onClick={slideOut}
+                        >
+                          <img src={cogIcon} alt="" className="h-6" />
+                          Voltage
+                        </Link>
+                      </li>
+                      <li className="h-8">
+                        <Link
+                          to={`/batteries/${battery.id}?graph=current`}
+                          className="flex items-center gap-2 pl-3 my-2"
+                          onClick={slideOut}
+                        >
+                          <img src={cogIcon} alt="" className="h-6" />
+                          Current
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                ))}
               </ul>
             </li>
           </ul>
