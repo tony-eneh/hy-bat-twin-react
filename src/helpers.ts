@@ -23,3 +23,11 @@ export const toaster = {
   warning: (message: string) => toast.warning(message, toastSettings),
   error: (message: string) => toast.error(message, toastSettings),
 };
+
+export function stripTime(dateString: string) {
+  return dateString.split('T')[0];
+}
+
+export function truncateText(text: string = '', maxLength = 120) {
+  return text.length > 30 ? text.substring(0, maxLength) + '...' : text;
+}
