@@ -21,6 +21,8 @@ export interface Battery {
   dataSource: string; // url of where to fetch sensor readings for this battery
   createdAt: string;
   predictions?: BatteryPrediction[];
+  image?: string;
+  description?: string;
 }
 
 export interface BatteryPrediction extends BatteryPredictionPayload {
