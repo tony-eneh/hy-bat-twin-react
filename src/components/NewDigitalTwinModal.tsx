@@ -21,7 +21,7 @@ export function NewDigitalTwinModal({ show, close }: ModalProps) {
   const { data: sources } = useSelector<AppStore, ApiResponse<BatteryData[]>>(
     (state) => state.dataSources
   );
-  const [newlyCreatedBattery, setNewlyCreatedBattery] = useState({} as Battery);
+  const [newlyCreatedBattery, setNewlyCreatedBattery] = useState<Battery>();
   const [creatingBattery, setCreatingBattery] = useState(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
