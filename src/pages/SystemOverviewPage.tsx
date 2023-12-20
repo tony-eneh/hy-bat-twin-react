@@ -6,7 +6,7 @@ export function SystemOverviewPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (
-    <div className="flex flex-col items-center flex-grow p-4 gap-10 justify-center text-center">
+    <div className="flex flex-col items-center flex-grow p-4 gap-10 justify-center text-center h-full">
       <p className="font-['Kaushan_Script']">Hy Bat Twin</p>
       <p className="text-6xl font-bold">
         Digital twin model for <span className="line-through">gadgets</span>{' '}
