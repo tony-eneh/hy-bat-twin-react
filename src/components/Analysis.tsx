@@ -3,6 +3,7 @@ import { Battery, BatteryPrediction } from '../types';
 import { SectionHeading } from './SectionHeading';
 import { getPredictions } from '../services/batteries';
 import PredictionsGraph from './PredictionsGraph';
+import { Modal } from '.';
 
 interface Props {
   battery: Battery;
@@ -12,6 +13,7 @@ interface Props {
 export function Analysis({ battery, className = '' }: Props) {
   const [loading, setLoading] = useState(false);
   const [predictions, setPredictions] = useState<BatteryPrediction[]>();
+  const [expandedView, setExpandedView] = useState<'soc' | 'soh'>();
 
   useEffect(() => {
     setLoading(true);
@@ -34,21 +36,29 @@ export function Analysis({ battery, className = '' }: Props) {
 
       {predictions && (
         <>
-          {/* <div className="flex-grow"> */}
           <PredictionsGraph
             className="flex-grow"
             predictions={predictions}
             type="soc"
+            onClick={() => setExpandedView('soc')}
           />
-          {/* </div>
-          <div className="flex-grow"> */}
           <PredictionsGraph
             className="flex-grow"
             predictions={predictions}
             type="soh"
+            onClick={() => setExpandedView('soh')}
           />
-          {/* </div> */}
         </>
+      )}
+
+      {predictions && (
+        <Modal
+          show={!!expandedView}
+          close={() => setExpandedView(undefined)}
+          size="lg"
+        >
+          <PredictionsGraph predictions={predictions} type={expandedView!} />
+        </Modal>
       )}
     </div>
   );

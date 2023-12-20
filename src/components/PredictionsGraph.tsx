@@ -40,9 +40,15 @@ interface Props {
   className?: string;
   predictions: BatteryPrediction[];
   type: 'soh' | 'soc';
+  onClick?: () => void;
 }
 
-export default function PredictionsGraph({ predictions, type }: Props) {
+export default function PredictionsGraph({
+  predictions,
+  type,
+  onClick,
+  className,
+}: Props) {
   const options = {
     responsive: true,
     plugins: {
@@ -70,5 +76,12 @@ export default function PredictionsGraph({ predictions, type }: Props) {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <Line
+      options={options}
+      data={data}
+      onClick={onClick}
+      className={className}
+    />
+  );
 }
