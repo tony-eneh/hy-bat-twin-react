@@ -1,29 +1,23 @@
 export function CurrentIcon() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
         d="M3.13037 3.97752C4.84735 3.97752 5.75978 6.66314 7.53845 6.66314C9.31713 6.66314 10.2575 3.97752 12.0106 3.97752C13.7638 3.97752 14.7429 6.66314 16.5092 6.66314C18.2754 6.66314 19.1706 3.97752 20.9948 3.95247"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M3.13086 10.6916C4.84783 10.6916 5.76027 13.3772 7.53894 13.3772C9.31762 13.3772 10.2579 10.6916 12.0111 10.6916C13.7643 10.6916 14.7434 13.3772 16.5097 13.3772C18.2759 13.3772 19.1711 10.6916 20.9953 10.6665"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M3.13086 17.4056C4.84783 17.4056 5.76027 20.0912 7.53894 20.0912C9.31762 20.0912 10.2579 17.4056 12.0111 17.4056C13.7643 17.4056 14.7434 20.0912 16.5097 20.0912C18.2759 20.0912 19.1711 17.4056 20.9953 17.3806"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
