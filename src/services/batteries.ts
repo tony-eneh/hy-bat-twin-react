@@ -3,6 +3,7 @@ import {
   Battery,
   BatteryPrediction,
   BatteryPredictionPayload,
+  BatteryReading,
   GetPredictionsPayload,
 } from '../types';
 import { headers, serialize } from '../helpers';
@@ -49,6 +50,17 @@ export function getPredictions(
       ...payload,
       step: payload.step || 25,
     })}`,
+    {
+      headers,
+    }
+  ).then((res) => res.json());
+}
+
+export function getReadings(
+  batteryId: number
+): Promise<ApiResponse<BatteryReading[]>> {
+  return fetch(
+    `${import.meta.env.VITE_API_URL}/batteries/${batteryId}/readings`,
     {
       headers,
     }

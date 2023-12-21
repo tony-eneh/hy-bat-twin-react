@@ -1,5 +1,6 @@
 export interface BatteryReading {
-  createdAt: Date; // when this reading was taken
+  batteryId: number;
+  createdAt: string; // when this reading was taken
   temperature: number;
   voltage: number;
   current: number;
