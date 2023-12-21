@@ -29,6 +29,7 @@ export function NewDigitalTwinModal({ show, close }: ModalProps) {
   const clearData = useCallback(() => {
     setNewBatteryName('');
     setNewBatterySource(undefined);
+    setNewBatteryDescription('');
   }, []);
 
   const dispatch = useDispatch();
@@ -39,14 +40,14 @@ export function NewDigitalTwinModal({ show, close }: ModalProps) {
 
   const handleNewDigitalTwinSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!newBatterySource || !newBatteryName || !newBatteryDescription) return;
+    if (!newBatterySource || !newBatteryName) return;
 
     setCreatingBattery(true);
 
     createBattery({
       name: newBatteryName,
       source: newBatterySource.id + '',
-      description: newBatteryDescription,
+      description: newBatteryDescription || '',
     })
       .then((res) => {
         setNewlyCreatedBattery(res.data);
@@ -54,7 +55,8 @@ export function NewDigitalTwinModal({ show, close }: ModalProps) {
       })
       .then(() => getBatteries()) // refresh list
       .then((res) => dispatch(setBatteries(res)))
-      .finally(() => setCreatingBattery(false));
+      .finally(() => setCreatingBattery(false))
+      .finally(() => clearData());
   };
 
   return (
@@ -117,8 +119,7 @@ export function NewDigitalTwinModal({ show, close }: ModalProps) {
             disabled={
               creatingBattery ||
               !newBatterySource ||
-              !newBatteryName ||
-              !newBatteryDescription
+              !newBatteryName
             }
             className="bg-sidebarBg text-white px-8 py-2 rounded-lg disabled:bg-sidebarBg/70 disabled:cursor-not-allowed"
           >
