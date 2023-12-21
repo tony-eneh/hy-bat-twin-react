@@ -29,7 +29,7 @@ export function stripTime(dateString: string) {
 }
 
 export function truncateText(text: string = '', maxLength = 120) {
-  return text.length > 30 ? text.substring(0, maxLength) + '...' : text;
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 }
 
 export function isDigits(value: string) {
