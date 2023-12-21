@@ -57,12 +57,17 @@ export function BatteryDetails({ battery, className = '' }: Props) {
 
         <div className="bg-white/70 backdrop-blur-sm p-2 space-y-2">
           <div>
-            <button
-              onClick={() => setExpandedView(!expandedView)}
-              className="border p-2 rounded border-black absolute right-2"
-            >
-              <CaretIcon direction={expandedView ? 'down' : 'up'} />
-            </button>
+            {/* show button to toggle full description only if full description is longer than truncated version */}
+            {truncateText(battery.description)?.length <
+              (battery.description || '').length && (
+              <button
+                onClick={() => setExpandedView(!expandedView)}
+                className="border p-2 rounded border-black absolute right-2"
+              >
+                <CaretIcon direction={expandedView ? 'down' : 'up'} />
+              </button>
+            )}
+
             <div>
               <span className="italic text-sm">Charge Cycles:</span>{' '}
               {battery.chargeCycles}
@@ -73,6 +78,7 @@ export function BatteryDetails({ battery, className = '' }: Props) {
                 : truncateText(battery.description, 50)}
             </div>
           </div>
+          {/* sensor reading buttons */}
           <div className="flex justify-between">
             <Link
               to={`/batteries/${battery.id}?graph=temperature`}
