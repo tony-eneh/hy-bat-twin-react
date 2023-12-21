@@ -25,6 +25,7 @@ export interface Battery {
   image?: string;
   description?: string;
   chargeCycles: number;
+  gltf?: string; // url to gltf (3d image) file
 }
 
 export interface BatteryPrediction extends BatteryPredictionPayload {
