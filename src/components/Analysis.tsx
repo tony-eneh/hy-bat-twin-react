@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { Battery, BatteryPrediction } from '../types';
 import { SectionHeading } from './SectionHeading';
 import { getPredictions } from '../services/batteries';
-import PredictionsGraph from './PredictionsGraph';
-import { Modal } from '.';
+import { Modal, PredictionsGraph } from '.';
 
 interface Props {
   battery: Battery;
@@ -37,13 +36,13 @@ export function Analysis({ battery, className = '' }: Props) {
       {predictions && (
         <>
           <PredictionsGraph
-            className="flex-grow"
+            className="flex-grow backdrop-blur-sm"
             predictions={predictions}
             type="soc"
             onClick={() => setExpandedView('soc')}
           />
           <PredictionsGraph
-            className="flex-grow"
+            className="flex-grow backdrop-blur-sm"
             predictions={predictions}
             type="soh"
             onClick={() => setExpandedView('soh')}

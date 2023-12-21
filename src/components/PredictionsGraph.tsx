@@ -43,7 +43,7 @@ interface Props {
   onClick?: () => void;
 }
 
-export default function PredictionsGraph({
+export function PredictionsGraph({
   predictions,
   type,
   onClick,
