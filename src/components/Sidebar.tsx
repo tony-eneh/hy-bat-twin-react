@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import searchIcon from '../assets/images/search.png';
 import openBoxIcon from '../assets/images/open-box.png';
 import batteryIcon from '../assets/images/menu-item.png';
-import cogIcon from '../assets/images/cog.png';
 import { Link, useLocation } from 'react-router-dom';
-import { TriangleIcon } from './icons';
+import {
+  CurrentIcon,
+  TemperatureIcon,
+  TriangleIcon,
+  VoltageIcon,
+} from './icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiResponse, AppStore, Battery } from '../types';
 import { getBatteries } from '../services/batteries';
@@ -153,7 +157,7 @@ export function Sidebar(props: Props) {
                           className="flex items-center gap-2 pl-3 my-2"
                           onClick={slideOut}
                         >
-                          <img src={cogIcon} alt="" className="h-6" />
+                          <TemperatureIcon />
                           Temperature
                         </Link>
                       </li>
@@ -163,7 +167,7 @@ export function Sidebar(props: Props) {
                           className="flex items-center gap-2 pl-3 my-2"
                           onClick={slideOut}
                         >
-                          <img src={cogIcon} alt="" className="h-6" />
+                          <VoltageIcon />
                           Voltage
                         </Link>
                       </li>
@@ -173,7 +177,7 @@ export function Sidebar(props: Props) {
                           className="flex items-center gap-2 pl-3 my-2"
                           onClick={slideOut}
                         >
-                          <img src={cogIcon} alt="" className="h-6" />
+                          <CurrentIcon />
                           Current
                         </Link>
                       </li>
