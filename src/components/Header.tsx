@@ -4,6 +4,7 @@ import checkedIcon from '../assets/images/all-changes-saved.png';
 import helpIcon from '../assets/images/help.png';
 import profileIcon from '../assets/images/profile.png';
 import { MenuIcon } from './icons';
+import { useScreenSize } from '../hooks';
 
 interface Props {
   open?: boolean;
@@ -15,9 +16,14 @@ export function Header(props: Props) {
   const {} = props;
 
   const location = useLocation();
+  const { isMobile } = useScreenSize();
 
   return (
-    <header className="flex gap-x-10 items-center bg-black text-gray-300 p-2 flex-wrap relative">
+    <header
+      className={`flex gap-x-10 items-center bg-black text-gray-300 px-2 h-12 flex-wrap relative ${
+        isMobile && '!h-24'
+      }`}
+    >
       <div className="mr-auto flex gap-x-5 items-center basis-full sm:basis-auto">
         <Link to={'/'} className="font-bold">
           HyBatTwin

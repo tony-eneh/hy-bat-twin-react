@@ -1,5 +1,6 @@
 export interface BatteryReading {
-  createdAt: Date; // when this reading was taken
+  batteryId: number;
+  createdAt: string; // when this reading was taken
   temperature: number;
   voltage: number;
   current: number;
@@ -21,6 +22,10 @@ export interface Battery {
   dataSource: string; // url of where to fetch sensor readings for this battery
   createdAt: string;
   predictions?: BatteryPrediction[];
+  image?: string;
+  description?: string;
+  chargeCycles: number;
+  gltf?: string; // url to gltf (3d image) file
 }
 
 export interface BatteryPrediction extends BatteryPredictionPayload {
@@ -32,6 +37,13 @@ export interface BatteryPrediction extends BatteryPredictionPayload {
 export interface BatteryPredictionPayload {
   batteryId: number;
   chargeCycles: number;
+}
+
+export interface GetPredictionsPayload {
+  batteryId: number;
+  minChargeCycle: number;
+  maxChargeCycle: number;
+  step?: number;
 }
 
 export interface ApiResponse<T = unknown> {
@@ -47,4 +59,9 @@ export enum ApiStatus {
   PENDING,
   ERROR,
   SUCCESS,
+  IDLE,
+}
+export interface AppStore {
+  batteries: ApiResponse<Battery[]>;
+  dataSources: ApiResponse<BatteryData[]>;
 }

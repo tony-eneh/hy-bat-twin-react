@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useClickOutside } from '../hooks';
 
 interface Props<T> {
@@ -37,7 +37,7 @@ export function Dropdown<T>({
           className={`absolute bg-white py-4 right-0 shadow-lg text-left`}
           ref={optionsRef}
         >
-          {options.map((option, i) => (
+          {options?.map((option, i) => (
             <li
               key={i}
               onClick={() => {
