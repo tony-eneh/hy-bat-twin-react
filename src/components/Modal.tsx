@@ -1,5 +1,5 @@
 import { useClickOutside } from '../hooks';
-import React, { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
 const sizes = {
   sm: ' w-96',
