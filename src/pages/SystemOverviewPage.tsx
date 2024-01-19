@@ -8,10 +8,7 @@ export function SystemOverviewPage() {
   return (
     <div className="flex flex-col items-center flex-grow p-4 gap-10 justify-center text-center h-full">
       <p className="font-['Kaushan_Script']">Hy Bat Twin</p>
-      <p className="text-6xl font-bold">
-        Digital twin model for <span className="line-through">gadgets</span>{' '}
-        batteries
-      </p>
+      <p className="text-6xl font-bold">Digital twin model for batteries</p>
       <p>
         Easily predict State of Health (SOH) and State of Charge (SOC) for your
         batteries using temperature, voltage, current and charge cycles as input
